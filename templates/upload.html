@@ -3,107 +3,101 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Upload Your Wedding Photo</title>
+    <title>Upload a Photo</title>
     <style>
       :root {
         --lavender: #cdb4db;
-        --sage: #a8c3a0;
         --white: #ffffff;
-        --gray: #555;
+      }
+
+      * {
+        box-sizing: border-box;
       }
 
       body {
-        background: var(--white);
+        margin: 0;
+        padding: 0;
+        background-color: var(--white);
         font-family: "Helvetica Neue", Arial, sans-serif;
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         height: 100vh;
-        margin: 0;
-        color: var(--gray);
+        color: var(--lavender);
       }
 
       h1 {
-        font-size: 2em;
-        margin-bottom: 1rem;
-        color: var(--lavender);
+        margin-bottom: 2rem;
         font-weight: normal;
       }
 
-      .upload-container {
+      form {
         display: flex;
         flex-direction: column;
         align-items: center;
-        background: var(--sage);
+        gap: 1.5rem;
+        background-color: var(--lavender);
         padding: 2rem;
-        border-radius: 12px;
+        border-radius: 10px;
         width: 90%;
-        max-width: 400px;
+        max-width: 360px;
       }
 
       input[type="file"] {
         display: none;
       }
 
-      label.custom-file-upload {
-        padding: 10px 20px;
-        border: 2px solid var(--lavender);
-        border-radius: 25px;
-        background: var(--white);
-        color: var(--lavender);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        text-align: center;
-      }
-
-      label.custom-file-upload:hover {
-        background: var(--lavender);
+      label {
+        padding: 0.75rem 1.5rem;
+        border: 2px solid var(--white);
         color: var(--white);
-      }
-
-      button {
-        background: var(--lavender);
-        border: none;
-        padding: 10px 20px;
-        border-radius: 25px;
-        color: var(--white);
-        font-size: 1rem;
+        border-radius: 50px;
         cursor: pointer;
         transition: background 0.3s ease;
       }
 
-      button:hover {
-        background: #b19cd9;
+      label:hover {
+        background: var(--white);
+        color: var(--lavender);
       }
 
       #file-chosen {
-        margin-bottom: 1rem;
-        font-size: 0.9em;
         color: var(--white);
+        font-size: 0.9em;
+      }
+
+      button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 50px;
+        background-color: var(--white);
+        color: var(--lavender);
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #e6d3f2;
       }
     </style>
   </head>
   <body>
-    <h1>Share a Memory</h1>
-
-    <div class="upload-container">
-      <form action="/upload" method="POST" enctype="multipart/form-data">
-        <label for="photo" class="custom-file-upload"> Choose a Photo </label>
-        <input
-          type="file"
-          id="photo"
-          name="photo"
-          accept="image/*"
-          onchange="updateFileName()"
-          required
-        />
-        <div id="file-chosen">No file chosen</div>
-        <button type="submit">Upload</button>
-      </form>
-    </div>
+    <h1>Upload a Memory</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <label for="photo">Choose a Photo</label>
+      <input
+        type="file"
+        id="photo"
+        name="photo"
+        accept="image/*"
+        onchange="updateFileName()"
+        required
+      />
+      <div id="file-chosen">No file chosen</div>
+      <button type="submit">Upload</button>
+    </form>
 
     <script>
       function updateFileName() {
