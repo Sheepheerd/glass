@@ -2,13 +2,111 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Upload Your Photos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Upload Your Photo</title>
+    <style>
+      body {
+        background: linear-gradient(to right, #f8f8f8, #fff0f5);
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 2.5em;
+        text-align: center;
+      }
+
+      .upload-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .custom-file-upload {
+        display: inline-block;
+        padding: 12px 25px;
+        cursor: pointer;
+        border: 2px solid #ff69b4;
+        background-color: #fff;
+        color: #ff69b4;
+        border-radius: 50px;
+        transition:
+          background 0.3s,
+          color 0.3s;
+        font-weight: bold;
+        font-size: 1rem;
+      }
+
+      .custom-file-upload:hover {
+        background-color: #ff69b4;
+        color: white;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: #6a5acd;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background-color: #483d8b;
+      }
+
+      #file-chosen {
+        margin-top: 10px;
+        color: #555;
+        font-size: 0.9em;
+      }
+    </style>
   </head>
   <body>
-    <h1>Upload Your Favorite Photos!</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" name="photo" accept="image/*" required /><br /><br />
-      <button type="submit">Upload</button>
-    </form>
+    <h1>Share Your Memories!</h1>
+
+    <div class="upload-container">
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="photo" class="custom-file-upload"> Choose a Photo </label>
+        <input
+          type="file"
+          id="photo"
+          name="photo"
+          accept="image/*"
+          onchange="updateFileName()"
+          required
+        />
+        <div id="file-chosen">No file chosen</div>
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+
+    <script>
+      function updateFileName() {
+        const input = document.getElementById("photo");
+        const fileName =
+          input.files.length > 0 ? input.files[0].name : "No file chosen";
+        document.getElementById("file-chosen").textContent = fileName;
+      }
+    </script>
   </body>
 </html>
