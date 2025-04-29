@@ -4,11 +4,9 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# Folder to store uploaded files
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Allowed file extensions
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 
@@ -38,4 +36,5 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))  # This line is important for Render
+    app.run(host="0.0.0.0", port=port)
