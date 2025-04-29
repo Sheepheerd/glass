@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import os
 from werkzeug.utils import secure_filename
 
@@ -30,11 +30,11 @@ def upload_file():
         filename = secure_filename(file.filename)
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         file.save(filepath)
-        return "Thank you for uploading your photo!"
+        return render_template("thank_you.html")
     else:
         return "Invalid file type. Only PNG, JPG, and JPEG are allowed.", 400
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # This line is important for Render
+    port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
