@@ -1,9 +1,3 @@
-from flask import Flask, request, render_template, redirect, url_for
-import os
-from werkzeug.utils import secure_filename
-
-app = Flask(__name__)
-
 from flask import Flask, request, render_template
 import os
 from werkzeug.utils import secure_filename
@@ -12,7 +6,7 @@ import stat
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = os.path.join(os.getcwd(), "private_uploads")
+UPLOAD_FOLDER = "/var/data/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
@@ -44,7 +38,7 @@ def upload_file():
             filename = secure_filename(unique_name)
             filepath = os.path.join(UPLOAD_FOLDER, filename)
             file.save(filepath)
-            os.chmod(filepath, stat.S_IRUSR | stat.S_IWUSR)
+            os.chmod(filepath, stat.S_IRUSR | stat.S_IWUSR)  # Owner read/write
             saved_files.append(filename)
 
     if not saved_files:

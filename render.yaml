@@ -2,6 +2,10 @@ services:
   - type: web
     name: photo-upload
     env: python
-    plan: free
+    plan: starter
     buildCommand: "pip install -r requirements.txt"
     startCommand: "python app.py"
+    disks:
+      - name: upload-disk
+        mountPath: /var/data
+        sizeGB: 10
