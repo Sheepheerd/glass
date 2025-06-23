@@ -6,7 +6,7 @@ import stat
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = "/var/data/uploads"
+UPLOAD_FOLDER = os.path.join(os.getcwd(), "private_uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
